@@ -27,7 +27,9 @@ namespace excel2json {
         /// </summary>
         /// <param name="sheet">Excel读取的一个表单</param>
         /// <param name="headerRows">表头有几行</param>
-        public SQLExporter(string tableName, DataTable sheet, int headerRows) {
+        public SQLExporter(string excelName, DataTable sheet, int headerRows) {
+            string tableName = sheet.TableName;
+
             //-- 转换成SQL语句
             mStructSQL = GetTabelStructSQL(sheet, tableName);
             mContentSQL = GetTableContentSQL(sheet, tableName, headerRows);

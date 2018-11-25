@@ -44,18 +44,27 @@ namespace excel2json {
 
             //-- 创建代码字符串
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("//");
-            sb.AppendLine("// Auto Generated Code By excel2json");
-            sb.AppendLine("//");
+            sb.AppendLine("/// <summary>");
+            sb.AppendLine("/// Auto Generated Code By excel2json");
+            sb.AppendFormat("/// Generate From {0}.xlsx", excelName);
             sb.AppendLine();
-            sb.AppendFormat("// Generate From {0}.xlsx", excelName);
-            sb.AppendLine();
-            sb.AppendFormat("public class {0}\r\n{{", excelName);
+            sb.AppendLine("/// </summary>");
+            sb.AppendFormat("public class {0}ConfigVO\r\n{{", sheet.TableName);
             sb.AppendLine();
 
-            foreach (FieldDef field in m_fieldList) {
-                sb.AppendFormat("\tpublic {0} {1}; // {2}", field.type, field.name, field.comment);
+            for (int i = 0; i < m_fieldList.Count; i++) 
+            {
+                FieldDef field = m_fieldList[i];
+
+                sb.AppendFormat("\t/// <summary>\n");
+                sb.AppendFormat("\t/// {0}\n", field.comment);
+                sb.AppendFormat("\t/// </summary>\n");
+                sb.AppendFormat("\tpublic {0} {1};", field.type, field.name);
                 sb.AppendLine();
+                if (i < m_fieldList.Count - 1)
+                {
+                    sb.AppendLine();
+                }
             }
 
             sb.Append('}');

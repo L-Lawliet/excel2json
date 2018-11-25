@@ -47,6 +47,7 @@ namespace excel2json {
                     }
                     catch (Exception exp) {
                         Console.WriteLine("Error: " + exp.Message);
+                        Console.WriteLine("Error: " + options.ExcelPath);
                     }
                 }
             }// end of else
